@@ -17,11 +17,11 @@ const reqSchema = Joi.object().keys({
 });
 
 /* GET home page. */
-router.get('/home', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index', { title: 'SVK Cabbie' });
 });
 
-router.patch('/drivers',function(req,res){
+router.patch('/api/drivers',function(req,res){
    const {body} = req;
    const {error} = Joi.validate(body, reqSchema);
    if(error){
@@ -53,7 +53,7 @@ router.patch('/drivers',function(req,res){
     }
 });
 
-router.get('/drivers',function(req,res){
+router.get('/api/drivers',function(req,res){
      //db.serialize(function(){
        db.all(
            "SELECT * FROM drivers", 
@@ -85,7 +85,7 @@ router.get('/drivers',function(req,res){
    
 });
 
-router.get('/drivers/:id',function(req,res){
+router.get('/api/drivers/:id',function(req,res){
    const {id} = req.params;
    db.get("select * from drivers where id=?",id, function(err,row){
        if(err) {
