@@ -63,7 +63,7 @@ router.get('/api/drivers',function(req,res){
                    .status(500)
                    .send({
                        status:'error', 
-                       msg:err.message
+                       svkmsr6msg:err.message
                    });
                }
                if(!rows || rows.length === 0){
