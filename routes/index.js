@@ -13,7 +13,8 @@ const router = express.Router();
 
 const reqSchema = Joi.object().keys({
   id:Joi.number().integer().required(),
-  rating:Joi.number().less(5.0).greater(0.0).required()
+  rating:Joi.number().less(5.0).greater(0.0).required(),
+  rides:Joi.number().integer().required()
 });
 
 /* GET home page. */
@@ -32,8 +33,8 @@ router.patch('/api/drivers',function(req,res){
            msg:error
        });
    } else {
-       const {id, rating} = body;
-       db.run('update drivers set rating=? where id=?',[rating, id], function(err){
+       const {id, rating, rides} = body;
+       db.run('update drivers set rating=?, rides=? where id=?',[rating, rides, id], function(err){
            if(err){
                return res
                .status(500)
